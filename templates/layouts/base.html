@@ -1,0 +1,365 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}Volt Dashboard{% endblock %}</title>
+    
+    <!-- Volt CSS -->
+    <link type="text/css" href="{% static 'css/volt.css' %}" rel="stylesheet">
+    
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core CSS -->
+    <link type="text/css" href="{% static 'vendor/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'css/volt.css' %}" rel="stylesheet">
+
+    <!-- Specific Page CSS -->
+    {% block stylesheets %}{% endblock stylesheets %}
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #4f6df5;
+            --primary-hover: #3a56d7;
+            --secondary-color: #6c8cfd;
+            --sidebar-bg: #f8f9fc;
+            --sidebar-text: #434a6a;
+            --sidebar-hover: #ebeef9;
+            --content-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --card-border: rgba(0, 0, 0, 0.06);
+            --header-bg: #ffffff;
+            --header-border: rgba(0, 0, 0, 0.06);
+            --text-primary: #2e3650;
+            --text-secondary: #6e7891;
+        }
+        
+        body {
+            background-color: var(--content-bg) !important;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            color: var(--text-primary);
+        }
+        
+        /* Sidebar styling */
+        .sidebar {
+            background-color: var(--sidebar-bg) !important;
+            margin-top: 0;
+            padding-top: 0;
+            color: var(--sidebar-text) !important;
+            border-right: 1px solid var(--card-border);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.02);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1020;
+        }
+        
+        .sidebar .nav-link {
+            color: var(--sidebar-text) !important;
+            border-radius: 8px;
+            margin: 4px 8px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background-color: var(--sidebar-hover) !important;
+            color: var(--primary-color) !important;
+        }
+        
+        .sidebar .nav-link[data-bs-toggle="collapse"] {
+            font-weight: 500;
+        }
+        
+        .sidebar .nav-link[data-bs-toggle="collapse"]:not(.collapsed) {
+            background-color: var(--sidebar-hover) !important;
+            color: var(--primary-color) !important;
+            font-weight: 600;
+        }
+        
+        .sidebar .sidebar-text {
+            color: var(--text-primary) !important;
+            font-weight: 600;
+        }
+        
+        .sidebar .sidebar-icon {
+            color: var(--primary-color) !important;
+        }
+        
+        /* Logo styling in sidebar */
+        .sidebar .logo-container {
+            margin-bottom: 16px;
+        }
+        
+        .sidebar .logo-link {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar .logo-image {
+            height: 42px;
+            width: 42px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar .logo-text {
+            font-size: 18px;
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-left: 12px;
+            letter-spacing: -0.3px;
+        }
+        
+        .content {
+            margin-left: 258px; /* Match sidebar width */
+            background-color: var(--content-bg);
+            min-height: 100vh;
+            position: relative;
+            padding-top: 0; /* Navbar spacing handled by body padding */
+        }
+        
+        @media (max-width: 992px) {
+            .content {
+                margin-left: 0;
+            }
+        }
+        
+        /* Header styling */
+        .navbar-top {
+            background-color: var(--header-bg) !important;
+            border-bottom: 1px solid var(--header-border);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            min-height: 60px !important;
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+            z-index: 1030;
+            width: calc(100% - 258px); /* Subtract sidebar width */
+            right: 0;
+            left: 258px; /* Match sidebar width */
+        }
+        
+        /* Add padding to body for fixed navbar */
+        body {
+            padding-top: 60px; /* Match navbar height */
+        }
+        
+        /* Adjust navbar position based on screen size */
+        @media (max-width: 992px) {
+            .navbar-top {
+                width: 100%;
+                left: 0;
+                right: 0;
+            }
+        }
+        
+        .navbar-top .nav-link {
+            color: var(--text-primary) !important;
+            padding: 8px 12px !important;
+        }
+        
+        /* Card styling */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+        
+        /* Stats cards */
+        .stat-card {
+            padding: 24px;
+        }
+        
+        .stat-card .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        
+        .stat-card .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+        
+        .stat-card .stat-title {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+        
+        /* Chart containers */
+        .chart-container {
+            padding: 16px;
+        }
+        
+        .chart-container .chart-header {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .chart-container .chart-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0;
+        }
+        
+        /* Button styling */
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+        }
+        
+        /* Content containers */
+        .content-container {
+            padding: 24px 32px;
+            padding-top: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 16px;
+            }
+        }
+        
+        /* Page headers */
+        .page-header {
+            margin-bottom: 24px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .page-subtitle {
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+        
+        /* Mobile logo styling */
+        .navbar-brand-image {
+            height: 36px;
+            width: 36px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        
+        .navbar-brand {
+            font-size: 18px;
+        }
+        
+        /* Sidebar submenu styling */
+        .sidebar .multi-level {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar .multi-level.show {
+            max-height: 300px; /* Adjust as needed */
+        }
+        
+        .sidebar .multi-level .nav-link {
+            padding: 8px 12px;
+            font-size: 14px;
+            opacity: 0.85;
+            transition: all 0.2s ease;
+        }
+        
+        .sidebar .multi-level .nav-link:hover {
+            opacity: 1;
+            background-color: var(--sidebar-hover);
+        }
+        
+        .sidebar .chevron-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar .nav-link:not(.collapsed) .chevron-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Avatar */
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+
+</head>
+<body>
+    
+    {% include "includes/sidebar.html" %}
+    
+    <main class="content">
+        <div class="m-0 p-0">
+
+        <!-- Navbar -->
+        {% include "includes/navigation.html" %}
+
+        <!-- Main content -->
+        {% block content %}{% endblock content %}
+
+        <!-- Footer -->
+        {% include "includes/footer.html" %}
+        
+    </main>
+
+    <!-- Core JS -->
+    <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js' %}"></script>
+    <script src="{% static 'vendor/chartist/dist/chartist.min.js' %}"></script>
+    <script src="{% static 'vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' %}"></script>
+    <script src="{% static 'vendor/vanillajs-datepicker/dist/js/datepicker.min.js' %}"></script>
+    <script src="{% static 'vendor/sweetalert2/dist/sweetalert2.all.min.js' %}"></script>
+    <script src="{% static 'assets/js/volt.js' %}"></script>
+
+    <!-- Specific Page JS -->
+    {% block javascripts %}{% endblock javascripts %}
+
+</body>
+</html>

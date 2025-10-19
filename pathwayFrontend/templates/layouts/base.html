@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}Volt Dashboard{% endblock %}</title>
+    
+    <!-- Volt CSS -->
+    <link type="text/css" href="{% static 'css/volt.css' %}" rel="stylesheet">
+    
+    <!-- Core CSS -->
+    <link type="text/css" href="{% static 'vendor/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'css/volt.css' %}" rel="stylesheet">
+
+    <!-- Specific Page CSS -->
+    {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+<body>
+    
+    {% include "includes/sidebar.html" %}
+    
+    <main class="content">
+        <div class="bg-gray-800">
+
+        <!-- Navbar -->
+        {% include "includes/navigation.html" %}
+        </div>
+
+        <!-- Main content -->
+        {% block content %}{% endblock content %}
+
+        <!-- Footer -->
+        {% include "includes/footer.html" %}
+        
+    </main>
+
+    <!-- Core JS -->
+    <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js' %}"></script>
+    <script src="{% static 'vendor/chartist/dist/chartist.min.js' %}"></script>
+    <script src="{% static 'vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' %}"></script>
+    <script src="{% static 'vendor/vanillajs-datepicker/dist/js/datepicker.min.js' %}"></script>
+    <script src="{% static 'vendor/sweetalert2/dist/sweetalert2.all.min.js' %}"></script>
+    <script src="{% static 'assets/js/volt.js' %}"></script>
+
+    <!-- Specific Page JS -->
+    {% block javascripts %}{% endblock javascripts %}
+
+</body>
+</html>
