@@ -1,0 +1,62 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %}Event Type List{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div class="page-header d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="page-title">Hall Management</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Hall Management</a></li>
+                    <li class="breadcrumb-item"><a href="#">Creations</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Event Type List</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">Event Types</h5>
+                <a href="{% url 'hall:event_type_creation' %}" class="btn btn-sm btn-primary">New Event Type</a>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Event Type Name</th>
+                            <th>Created Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if event_types %}
+                            {% for event_type in event_types %}
+                                <tr>
+                                    <td>{{ event_type.name }}</td>
+                                    <td>{{ event_type.created_at|date:"M d, Y" }}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="#" class="btn btn-outline-primary">Edit</a>
+                                            <a href="#" class="btn btn-outline-danger">Delete</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center">No event types found.</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

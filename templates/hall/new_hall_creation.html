@@ -1,0 +1,190 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %}New Hall Creation{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div class="page-header d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="page-title">Hall Management</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Hall Management</a></li>
+                    <li class="breadcrumb-item"><a href="#">Creations</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">New Hall Creation</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">Halls</h5>
+                <button class="btn btn-sm btn-primary">New</button>
+            </div>
+            
+            <div class="row mb-4">
+                <div class="col-12">
+                    <!-- Status toggle buttons -->
+                    <div class="d-flex justify-content-end mb-3">
+                        <div class="btn-group" role="group" aria-label="Hall Status">
+                            <button type="button" class="btn btn-success active">Available</button>
+                            <button type="button" class="btn btn-outline-secondary">Maintenance</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Hall Creation Form -->
+                    <form method="post" action="{% url 'hall:new_hall_creation' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="status" id="status" value="available">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="company" class="form-label">Company</label>
+                                    <input type="text" class="form-control" id="company" value="NAGAAD HALLS" readonly>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="id_name" class="form-label">Hall Name</label>
+                                    {{ form.name }}
+                                    {% if form.name.errors %}
+                                        <div class="text-danger small">{{ form.name.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="id_location" class="form-label">Location</label>
+                                    {{ form.location }}
+                                    {% if form.location.errors %}
+                                        <div class="text-danger small">{{ form.location.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="id_capacity" class="form-label">Capacity</label>
+                                    {{ form.capacity }}
+                                    {% if form.capacity.errors %}
+                                        <div class="text-danger small">{{ form.capacity.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="id_price_per_guest" class="form-label">Price per Guest</label>
+                                    {{ form.price_per_guest }}
+                                    {% if form.price_per_guest.errors %}
+                                        <div class="text-danger small">{{ form.price_per_guest.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="id_facilities" class="form-label">Facilities</label>
+                                    {{ form.facilities }}
+                                    {% if form.facilities.errors %}
+                                        <div class="text-danger small">{{ form.facilities.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="id_income_account" class="form-label">Income Account <span class="text-danger">*</span></label>
+                                    {{ form.income_account }}
+                                    {% if form.income_account.errors %}
+                                        <div class="text-danger small">{{ form.income_account.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="id_extra_income_account" class="form-label">Extra Income Account <span class="text-danger">*</span></label>
+                                    {{ form.extra_income_account }}
+                                    {% if form.extra_income_account.errors %}
+                                        <div class="text-danger small">{{ form.extra_income_account.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label for="id_receivable_account" class="form-label">Receivable Account <span class="text-danger">*</span></label>
+                                    {{ form.receivable_account }}
+                                    {% if form.receivable_account.errors %}
+                                        <div class="text-danger small">{{ form.receivable_account.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                {{ form.is_available }}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h6 class="mb-0">General Information</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group mb-3">
+                                            <label for="id_description" class="form-label">Hall Description</label>
+                                            {{ form.description }}
+                                            {% if form.description.errors %}
+                                                <div class="text-danger small">{{ form.description.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        
+                                        <div class="form-group mb-3">
+                                            <label for="hallImage" class="form-label">Hall Images</label>
+                                            <input type="file" class="form-control" id="hallImage" name="hall_images" multiple>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-secondary me-2">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Hall</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle between Available and Maintenance status
+        const statusButtons = document.querySelectorAll('.btn-group[role="group"] button');
+        const statusInput = document.getElementById('status');
+        
+        statusButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                statusButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.classList.remove('btn-success');
+                    btn.classList.remove('btn-secondary');
+                    btn.classList.add('btn-outline-secondary');
+                });
+                
+                this.classList.add('active');
+                this.classList.remove('btn-outline-secondary');
+                
+                if (this.textContent.trim() === 'Available') {
+                    this.classList.add('btn-success');
+                    statusInput.value = 'available';
+                } else {
+                    this.classList.add('btn-secondary');
+                    statusInput.value = 'maintenance';
+                }
+            });
+        });
+        
+        // Handle cancel button
+        document.querySelector('button.btn-secondary').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.history.back();
+        });
+    });
+</script>
+{% endblock javascripts %}

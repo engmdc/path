@@ -23,6 +23,7 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('dashboard.urls')),
+    path('hall/', include('hall.urls', namespace='hall')),
     # Root URL is now handled by dashboard.urls
 ]
 
