@@ -1,0 +1,212 @@
+/* Custom styles for PathwaySolutions */
+
+/* Layout structure - completely remove any gaps */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* Top Navbar Styling */
+.navbar-top {
+    background-color: #e6f0ff !important; /* Light blue color */
+    height: 60px;
+    padding: 0 !important;
+    z-index: 101; /* Higher than sidebar */
+    width: calc(100% - 260px); /* Full width minus sidebar */
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 260px; /* Exactly where sidebar ends */
+    border-bottom: none;
+    box-shadow: none;
+    margin: 0;
+}
+
+.navbar-brand-container {
+    display: flex;
+    align-items: center;
+    padding-left: 30px; /* Simple padding from the edge of navbar */
+    height: 60px;
+    position: relative;
+}
+
+/* Adjust the navbar container */
+.container-fluid {
+    padding-left: 0;
+    padding-right: 20px;
+}
+
+.navbar-brand-container .logo-text {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 260px !important;
+    max-width: 260px !important;
+    min-width: 260px !important;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    position: fixed;
+    z-index: 100;
+    background-color: #d9e6ff !important; /* Light blue sidebar */
+    border-right: 1px solid #c4d8ff;
+    box-shadow: none; /* Remove shadow to avoid visual gap */
+    top: 0; /* Start from the very top */
+    padding: 0;
+    left: 0; /* Ensure it's aligned to the left */
+    margin: 0; /* Remove any margin */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure content inside sidebar doesn't overflow */
+.sidebar-inner {
+    width: 100%;
+    overflow-x: hidden;
+    padding-top: 0; /* Remove extra padding */
+    margin-top: 0; /* Remove any margin */
+    flex: 1;
+}
+
+/* Add a sidebar header for the logo */
+.sidebar-header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    background-color: #d9e6ff;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.sidebar-header .logo-text {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+/* Adjust main content to accommodate sidebar */
+.content {
+    margin-left: 260px !important;
+    padding-top: 60px !important;
+    background-color: #f9fafc;
+    min-height: 100vh;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 992px) {
+    .content {
+        margin-left: 0 !important;
+    }
+}
+
+/* Make sidebar items more readable */
+.sidebar .nav-link {
+    padding: 0.7rem 1rem;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+    color: #505a64;
+    font-size: 0.9rem;
+    margin: 2px 0;
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+/* Category headers in sidebar */
+.sidebar-category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #4b5563;
+    font-weight: 600;
+    padding: 0.7rem 1.5rem 0.5rem;
+    letter-spacing: 0.04em;
+    opacity: 0.8;
+}
+
+/* Hover effect for sidebar items */
+.sidebar .nav-link:hover {
+    background-color: rgba(59, 130, 246, 0.08);
+    color: #1e40af;
+}
+
+/* Active page highlighting */
+.sidebar .nav-link.active {
+    background-color: rgba(59, 130, 246, 0.15);
+    border-left: 3px solid #3b82f6;
+    color: #1e40af;
+    font-weight: 600;
+}
+
+/* Improve submenu spacing */
+.sidebar .multi-level .nav-link {
+    padding-left: 2.5rem;
+    font-size: 0.85rem;
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+/* Hover effect for submenu items */
+.sidebar .multi-level .nav-link:hover {
+    background-color: rgba(59, 130, 246, 0.05);
+    color: #1e40af;
+}
+
+/* Active submenu item */
+.sidebar .multi-level .nav-link.active {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-left: 3px solid #3b82f6;
+    color: #1e40af;
+}
+
+/* Sidebar icons */
+.sidebar-icon {
+    color: #4b5563;
+    margin-right: 0.75rem;
+    width: 20px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.sidebar-icon-sm {
+    color: #4b5563;
+    margin-right: 0.75rem;
+    width: 16px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.sidebar .nav-link.active .sidebar-icon,
+.sidebar .nav-link.active .sidebar-icon-sm {
+    color: #3b82f6;
+}
+
+.sidebar .nav-link:hover .sidebar-icon,
+.sidebar .nav-link:hover .sidebar-icon-sm {
+    color: #1e40af;
+}
+
+/* Ensure sidebar extends to full height */
+html, body {
+    height: 100%;
+}

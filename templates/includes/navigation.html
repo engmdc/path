@@ -1,19 +1,51 @@
 {% load static %}
 
-<nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-light ps-0 pe-2 py-2 fixed-top">
-  <div class="container-fluid px-3">
+<nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-light fixed-top">
+  <div class="container-fluid">
     <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
-      <div class="d-flex align-items-center">
-        <!-- Search form removed as requested -->
+      <!-- Empty space where logo used to be -->
+      <div class="navbar-brand-container">
+        <!-- Page title will go here -->
       </div>
+      
       <!-- Navbar links -->
       <ul class="navbar-nav align-items-center">
+        <!-- Notifications -->
+        <li class="nav-item dropdown me-3">
+          <a class="nav-link dropdown-toggle px-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="position-relative">
+              <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+              </svg>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
+            </span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end mt-2 py-0 shadow-sm border-0 rounded-lg">
+            <div class="dropdown-header bg-light py-2">
+              <strong>You have 3 notifications</strong>
+            </div>
+            <a class="dropdown-item d-flex align-items-center py-2" href="#">
+              <div class="me-3">
+                <span class="icon-circle bg-primary">
+                  <svg class="icon icon-xs text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"></path></svg>
+                </span>
+              </div>
+              <div>
+                <div class="text-dark">New booking received</div>
+                <div class="small text-muted">5 minutes ago</div>
+              </div>
+            </a>
+            <a class="dropdown-item text-center text-primary fw-bold rounded-bottom py-2" href="#">View all</a>
+          </div>
+        </li>
+        
+        <!-- User dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle px-2 rounded" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <div class="media d-flex align-items-center">
-              <img class="avatar rounded-circle" alt="User profile" src="{% static 'assets/img/team/profile-picture-3.jpg' %}">
+              <div class="avatar rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">S</div>
               <div class="media-body ms-2 align-items-center d-none d-lg-block">
-                <span class="mb-0 font-small fw-bold">User</span>
+                <span class="mb-0 font-small fw-bold">Super Admin</span>
               </div>
             </div>
           </a>
