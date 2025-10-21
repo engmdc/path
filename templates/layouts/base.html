@@ -26,6 +26,28 @@
     
     <!-- Custom CSS -->
     <style>
+        /* Force sidebar and navbar to blue gradient matching the image */
+        .sidebar, #sidebarMenu, .sidebar-header, .navbar-theme-primary, .navbar, .navbar-top {
+            background: linear-gradient(to bottom, #0c63b4 0%, #084d8f 100%) !important;
+            color: white !important;
+        }
+        
+        /* Force sidebar and navbar text to white regardless of theme */
+        .sidebar *, #sidebarMenu *, .sidebar-header *, .navbar-theme-primary *, .navbar *, .navbar-top * {
+            color: white !important;
+        }
+        
+        /* Override hover and active states */
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active,
+        .sidebar .nav-link[data-bs-toggle="collapse"]:not(.collapsed) {
+            background-color: #0047b3 !important;
+            color: #ffffff !important;
+            font-weight: bold !important;
+            text-shadow: 0 0 1px rgba(255,255,255,0.5) !important;
+            box-shadow: inset 0 0 5px rgba(255,255,255,0.2) !important;
+        }
+        
         :root {
             --primary-color: #4f6df5;
             --primary-hover: #3a56d7;
@@ -53,11 +75,11 @@
         
         /* Sidebar styling */
         .sidebar {
-            background-color: var(--sidebar-bg) !important;
+            background-color: #0052cc !important;
             margin-top: 0;
             padding-top: 0;
-            color: var(--sidebar-text) !important;
-            border-right: 1px solid var(--card-border);
+            color: white !important;
+            border-right: 1px solid #0047b3;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.02);
             position: fixed;
             top: 0;
@@ -67,7 +89,7 @@
         }
         
         .sidebar .nav-link {
-            color: var(--sidebar-text) !important;
+            color: white !important;
             border-radius: 8px;
             margin: 4px 8px;
             transition: all 0.2s ease;
@@ -76,8 +98,8 @@
         
         .sidebar .nav-link:hover,
         .sidebar .nav-link.active {
-            background-color: var(--sidebar-hover) !important;
-            color: var(--primary-color) !important;
+            background-color: #0047b3 !important;
+            color: white !important;
         }
         
         .sidebar .nav-link[data-bs-toggle="collapse"] {
@@ -85,18 +107,18 @@
         }
         
         .sidebar .nav-link[data-bs-toggle="collapse"]:not(.collapsed) {
-            background-color: var(--sidebar-hover) !important;
-            color: var(--primary-color) !important;
+            background-color: #0047b3 !important;
+            color: white !important;
             font-weight: 600;
         }
         
         .sidebar .sidebar-text {
-            color: var(--text-primary) !important;
+            color: white !important;
             font-weight: 600;
         }
         
         .sidebar .sidebar-icon {
-            color: var(--primary-color) !important;
+            color: white !important;
         }
         
         /* Logo styling in sidebar */
@@ -120,7 +142,7 @@
         
         .sidebar .logo-text {
             font-size: 18px;
-            color: var(--text-primary);
+            color: white !important;
             font-weight: 700;
             margin-left: 12px;
             letter-spacing: -0.3px;
@@ -142,8 +164,8 @@
         
         /* Header styling */
         .navbar-top {
-            background-color: var(--header-bg) !important;
-            border-bottom: 1px solid var(--header-border);
+            background-color: #0052cc !important;
+            border-bottom: 1px solid #0047b3;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
             min-height: 60px !important;
             padding-top: 8px !important;
@@ -169,8 +191,19 @@
         }
         
         .navbar-top .nav-link {
-            color: var(--text-primary) !important;
+            color: white !important;
             padding: 8px 12px !important;
+        }
+        
+        /* Active page highlighting to match reference image - removed white line */
+        .sidebar .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-weight: 600;
+            border-radius: 5px;
+            position: relative;
+            border: none !important;
+            border-left: none !important;
         }
         
         /* Card styling */
@@ -308,11 +341,13 @@
             font-size: 14px;
             opacity: 0.85;
             transition: all 0.2s ease;
+            color: white !important;
         }
         
         .sidebar .multi-level .nav-link:hover {
             opacity: 1;
-            background-color: var(--sidebar-hover);
+            background-color: #0047b3 !important;
+            color: white !important;
         }
         
         .sidebar .chevron-icon {
@@ -331,6 +366,54 @@
         }
     </style>
 
+    <style>
+        /* ABSOLUTE OVERRIDES FOR SIDEBAR AND NAVBAR CONTAINERS ONLY */
+        html body .sidebar,
+        html body .navbar-top,
+        html body .navbar-theme-primary,
+        html body #sidebarMenu,
+        html body .sidebar-inner,
+        html body .sidebar-header,
+        html body .sidebar > div,
+        html body #sidebarMenu > div {
+            background: linear-gradient(to bottom, #0c63b4 0%, #084d8f 100%) !important;
+            color: white !important;
+        }
+        html body .sidebar *,
+        html body .navbar-top *,
+        html body .navbar-theme-primary *,
+        html body #sidebarMenu * {
+            color: white;
+        }
+        
+        /* Removed white vertical line indicators for better UI/UX */
+        
+        /* Ultimate list marker removal - highest specificity */
+        html body .sidebar ul,
+        html body .sidebar li,
+        html body .sidebar .nav,
+        html body .sidebar .nav-item,
+        html body #sidebarMenu ul,
+        html body #sidebarMenu li,
+        html body #sidebarMenu .nav,
+        html body #sidebarMenu .nav-item {
+            list-style: none !important;
+            list-style-type: none !important;
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+            -webkit-padding-start: 0 !important;
+            display: block !important;
+        }
+        html body .sidebar .nav-link:hover,
+        html body .sidebar .nav-link.active {
+            background-color: #084d8f !important;
+            color: #ffffff !important;
+            font-weight: bold !important;
+            border-radius: 4px !important;
+            transform: translateX(3px);
+            position: relative;
+        }
+    </style>
 </head>
 <body>
     

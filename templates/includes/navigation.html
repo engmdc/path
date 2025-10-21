@@ -1,7 +1,40 @@
 {% load static %}
 
-<nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-light fixed-top">
-  <div class="container-fluid">
+<style>
+    /* SUPER STRONG OVERRIDES TO FORCE THE GRADIENT */
+    html body .navbar,
+    html body .navbar-top,
+    html body .navbar-dashboard,
+    html body .navbar-theme-primary,
+    html body .navbar div,
+    html body .navbar-top div,
+    html body .navbar span,
+    html body .navbar-top span,
+    html body .navbar a,
+    html body .navbar-top a {
+        background: linear-gradient(to bottom, #0c63b4 0%, #084d8f 100%) !important;
+    }
+    
+    /* Force navbar to have exact blue gradient matching the image */
+    .navbar,
+    .navbar-top,
+    .navbar-dashboard,
+    .navbar-theme-primary {
+        background: linear-gradient(to bottom, #0c63b4 0%, #084d8f 100%) !important;
+        color: white !important;
+    }
+    
+    /* Force navbar text to be white */
+    .navbar *,
+    .navbar-top *,
+    .navbar-dashboard *,
+    .navbar-theme-primary * {
+        color: white !important;
+    }
+</style>
+
+<nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-light fixed-top" style="background: linear-gradient(to bottom, #0c63b4 0%, #084d8f 100%) !important; color: white !important;">
+  <div class="container-fluid" style="background: linear-gradient(to bottom, #0c63b4 0%, #084d8f 100%) !important;">
     <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
       <!-- Empty space where logo used to be -->
       <div class="navbar-brand-container">
@@ -65,3 +98,13 @@
     </div>
   </div>
 </nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Force the gradient on the navbar container only
+    document.querySelectorAll('.navbar, .navbar-top').forEach(function(el) {
+      el.style.background = 'linear-gradient(to bottom, #0c63b4 0%, #084d8f 100%) !important';
+      el.setAttribute('style', 'background: linear-gradient(to bottom, #0c63b4 0%, #084d8f 100%) !important');
+    });
+  });
+</script>

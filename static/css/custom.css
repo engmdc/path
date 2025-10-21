@@ -14,7 +14,7 @@ html, body {
 
 /* Top Navbar Styling */
 .navbar-top {
-    background-color: #e6f0ff !important; /* Light blue color */
+    background: linear-gradient(to bottom, #0c63b4 0%, #084d8f 100%) !important; /* Exact gradient match from image */
     height: 60px;
     padding: 0 !important;
     z-index: 101; /* Higher than sidebar */
@@ -26,6 +26,34 @@ html, body {
     border-bottom: none;
     box-shadow: none;
     margin: 0;
+    color: white;
+}
+
+/* Ensure all text in navbar is white */
+.navbar-top * {
+    color: white !important;
+}
+
+/* Make navbar toggler icon white */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* Force navbar-theme-primary to have blue background */
+.navbar-theme-primary:not(.headroom),
+.navbar-theme-primary,
+[class*="navbar"],
+[id*="navbar"],
+[class*="Navbar"],
+[id*="Navbar"] {
+    background-color: #0052cc !important;
+    background-image: none !important;
+}
+
+/* Update navbar text and icon colors */
+.navbar-top .nav-link,
+.navbar-top .dropdown-toggle {
+    color: white !important;
 }
 
 .navbar-brand-container {
@@ -58,8 +86,8 @@ html, body {
     overflow-x: hidden; /* Prevent horizontal scrolling */
     position: fixed;
     z-index: 100;
-    background-color: #d9e6ff !important; /* Light blue sidebar */
-    border-right: 1px solid #c4d8ff;
+    background: linear-gradient(to bottom, #0c63b4 0%, #084d8f 100%) !important; /* Exact gradient match from image */
+    border-right: 1px solid #063c6e;
     box-shadow: none; /* Remove shadow to avoid visual gap */
     top: 0; /* Start from the very top */
     padding: 0;
@@ -67,6 +95,27 @@ html, body {
     margin: 0; /* Remove any margin */
     display: flex;
     flex-direction: column;
+    color: white; /* Ensure text is white */
+}
+
+/* Ensure all text in sidebar is white */
+.sidebar * {
+    color: white !important;
+}
+
+/* Force sidebar to have blue background even with higher specificity */
+.sidebar,
+.sidebar.sidebar,
+body .sidebar,
+html .sidebar,
+[class*="sidebar"],
+[id*="sidebar"],
+[class*="Sidebar"],
+[id*="Sidebar"],
+.sidebar-inner,
+.sidebar .sidebar-inner {
+    background: linear-gradient(to bottom, #0c63b4 0%, #084d8f 100%) !important;
+    background-image: none !important;
 }
 
 /* Ensure content inside sidebar doesn't overflow */
@@ -84,8 +133,8 @@ html, body {
     display: flex;
     align-items: center;
     padding-left: 20px;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    background-color: #d9e6ff;
+    border-bottom: 1px solid #063c6e;
+    background: linear-gradient(to bottom, #0c63b4 0%, #084d8f 100%) !important; /* Exact gradient match from image */
     margin: 0;
     padding-top: 0;
     padding-bottom: 0;
@@ -93,7 +142,7 @@ html, body {
 
 .sidebar-header .logo-text {
     font-weight: 600;
-    color: #333;
+    color: white !important;
     font-size: 1.1rem;
     text-transform: uppercase;
 }
@@ -113,69 +162,102 @@ html, body {
     }
 }
 
-/* Make sidebar items more readable */
+/* Make sidebar items more readable and consistent with design */
 .sidebar .nav-link {
-    padding: 0.7rem 1rem;
+    padding: 0.85rem 1.25rem;
     transition: all 0.2s ease;
     border-left: 3px solid transparent;
-    color: #505a64;
+    color: white !important;
     font-size: 0.9rem;
-    margin: 2px 0;
+    margin: 3px 6px;
     white-space: normal;
     word-wrap: break-word;
     line-height: 1.4;
+    border-radius: 5px;
 }
 
-/* Category headers in sidebar */
+/* Category headers in sidebar to match reference image */
 .sidebar-category {
     font-size: 0.75rem;
     text-transform: uppercase;
-    color: #4b5563;
+    color: rgba(255, 255, 255, 0.85) !important;
     font-weight: 600;
-    padding: 0.7rem 1.5rem 0.5rem;
-    letter-spacing: 0.04em;
-    opacity: 0.8;
+    padding: 1.25rem 1.5rem 0.5rem;
+    letter-spacing: 0.06em;
+    opacity: 1;
+    margin-top: 0.25rem;
+    background-color: rgba(0, 35, 90, 0.15);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.25rem;
 }
 
 /* Hover effect for sidebar items */
 .sidebar .nav-link:hover {
-    background-color: rgba(59, 130, 246, 0.08);
-    color: #1e40af;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
 }
 
-/* Active page highlighting */
+/* Active page highlighting to match reference image - removed white line */
 .sidebar .nav-link.active {
-    background-color: rgba(59, 130, 246, 0.15);
-    border-left: 3px solid #3b82f6;
-    color: #1e40af;
+    background-color: rgba(255, 255, 255, 0.25);
+    color: white;
     font-weight: 600;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
 }
 
-/* Improve submenu spacing */
+/* Remove the white vertical line indicator */
+
+/* Improve submenu spacing and styling */
 .sidebar .multi-level .nav-link {
-    padding-left: 2.5rem;
+    padding: 0.6rem 0.75rem 0.6rem 3rem;
     font-size: 0.85rem;
     white-space: normal;
     word-wrap: break-word;
     line-height: 1.4;
+    margin: 1px 8px;
+    position: relative;
 }
+
+/* Better styling for sidebar icons with proper alignment */
+.sidebar-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    opacity: 0.95;
+}
+
+/* Removed the active indicator white line */
 
 /* Hover effect for submenu items */
 .sidebar .multi-level .nav-link:hover {
-    background-color: rgba(59, 130, 246, 0.05);
-    color: #1e40af;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: all 0.2s ease;
 }
 
-/* Active submenu item */
+/* Active submenu item - removed white line on left */
 .sidebar .multi-level .nav-link.active {
-    background-color: rgba(59, 130, 246, 0.1);
-    border-left: 3px solid #3b82f6;
-    color: #1e40af;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
 }
 
 /* Sidebar icons */
 .sidebar-icon {
-    color: #4b5563;
+    color: white !important;
     margin-right: 0.75rem;
     width: 20px;
     text-align: center;
@@ -186,7 +268,7 @@ html, body {
 }
 
 .sidebar-icon-sm {
-    color: #4b5563;
+    color: white !important;
     margin-right: 0.75rem;
     width: 16px;
     text-align: center;
@@ -198,15 +280,70 @@ html, body {
 
 .sidebar .nav-link.active .sidebar-icon,
 .sidebar .nav-link.active .sidebar-icon-sm {
-    color: #3b82f6;
+    color: white;
 }
 
 .sidebar .nav-link:hover .sidebar-icon,
 .sidebar .nav-link:hover .sidebar-icon-sm {
-    color: #1e40af;
+    color: white;
 }
 
 /* Ensure sidebar extends to full height */
 html, body {
     height: 100%;
+}
+
+/* Remove all list bullets and markers */
+.sidebar ul,
+.sidebar-inner ul,
+.sidebar .nav,
+.sidebar-inner .nav,
+#sidebarMenu ul,
+#sidebarMenu .nav {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+.sidebar li,
+.sidebar-inner li,
+.sidebar .nav-item,
+.sidebar-inner .nav-item,
+#sidebarMenu li,
+#sidebarMenu .nav-item {
+    list-style-type: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    position: relative;
+}
+
+/* Fix the flex-column nav to avoid any bullet points */
+.sidebar .flex-column.nav,
+#sidebarMenu .flex-column.nav {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+/* Specifically target Dashboard and Profile items to remove the white line */
+.sidebar .nav-link.active,
+.sidebar a[href="/"],
+.sidebar a[href="/profile/"],
+.sidebar .nav-item:first-child .nav-link,
+.sidebar .nav-item:last-child .nav-link {
+    border: none !important;
+    border-left: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove any potential pseudo elements */
+.sidebar li::before,
+.sidebar .nav-item::before,
+.sidebar li::after,
+.sidebar .nav-item::after,
+#sidebarMenu li::before,
+#sidebarMenu .nav-item::before,
+#sidebarMenu li::after,
+#sidebarMenu .nav-item::after {
+    content: none !important;
+    display: none !important;
 }
