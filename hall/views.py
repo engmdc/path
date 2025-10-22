@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .forms import HallForm, FacilityForm, EventTypeForm
 from .models import Hall, Facility, EventType
 
+@login_required
 def new_hall_creation(request):
     if request.method == 'POST':
         form = HallForm(request.POST)
@@ -22,6 +24,7 @@ def new_hall_creation(request):
     }
     return render(request, 'hall/new_hall_creation.html', context)
 
+@login_required
 def facility_creation(request):
     if request.method == 'POST':
         form = FacilityForm(request.POST)
@@ -39,6 +42,7 @@ def facility_creation(request):
     }
     return render(request, 'hall/facility_creation.html', context)
 
+@login_required
 def facility_list(request):
     facilities = Facility.objects.all()
     context = {
@@ -46,6 +50,7 @@ def facility_list(request):
     }
     return render(request, 'hall/facility_list.html', context)
 
+@login_required
 def event_type_creation(request):
     if request.method == 'POST':
         form = EventTypeForm(request.POST)
@@ -63,6 +68,7 @@ def event_type_creation(request):
     }
     return render(request, 'hall/event_type_creation.html', context)
 
+@login_required
 def event_type_list(request):
     event_types = EventType.objects.all()
     context = {
@@ -70,6 +76,7 @@ def event_type_list(request):
     }
     return render(request, 'hall/event_type_list.html', context)
 
+@login_required
 def hall_list(request):
     halls = Hall.objects.all()
     context = {

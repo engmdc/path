@@ -27,10 +27,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# Import Jazzmin settings
+try:
+    from .jazzmin_settings import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS
+except ImportError:
+    # If jazzmin_settings doesn't exist, define empty settings
+    JAZZMIN_SETTINGS = {}
+    JAZZMIN_UI_TWEAKS = {}
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',  # Enhanced admin UI
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,7 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'pathfrontend.urls'
+ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'pathfrontend.wsgi.application'
+WSGI_APPLICATION = 'project.wsgi.application'
 
 
 # Database
@@ -131,3 +139,30 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'login'
+
+# Permission-related settings
+AUTH_USER_MODEL = 'auth.User'  # Using Django's default User model
+
+# Show permission description in admin
+SHOW_MODELS_PERMISSIONS = True
+
+# Require admin to check permissions everywhere
+ADMIN_REORDER = (
+    # Use app label as key and a dict of model: order as values
+    {'app': 'auth', 'models': ('auth.User', 'auth.Group', 'auth.Permission')},
+    {'app': 'hall', 'models': ('hall.Hall', 'hall.EventType', 'hall.Facility')},
+)
+
+# Email settings for password reset
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development only
+# For production, use SMTP settings like below:
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.example.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'your_email@example.com'
+# EMAIL_HOST_PASSWORD = 'your_password'
+# DEFAULT_FROM_EMAIL = 'PathwaySolutions <noreply@pathwaysolutions.com>'
+
+# Password reset token timeout (in days)
+PASSWORD_RESET_TIMEOUT = 259200  # 3 days

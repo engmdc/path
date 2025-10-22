@@ -6,8 +6,123 @@
 {% block extra_css %}
 <style>
     body {
-        background: linear-gradient(40deg, #2a2d3e, #131419);
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
         color: #fff;
+        overflow-x: hidden;
+        position: relative;
+    }
+    
+    /* Animated background */
+    .bg-animation {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 0;
+    }
+    
+    .bg-animation li {
+        position: absolute;
+        display: block;
+        list-style: none;
+        width: 20px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        animation: animate 25s linear infinite;
+        bottom: -150px;
+        border-radius: 50%;
+    }
+    
+    .bg-animation li:nth-child(1) {
+        left: 25%;
+        width: 80px;
+        height: 80px;
+        animation-delay: 0s;
+    }
+    
+    .bg-animation li:nth-child(2) {
+        left: 10%;
+        width: 20px;
+        height: 20px;
+        animation-delay: 2s;
+        animation-duration: 12s;
+    }
+    
+    .bg-animation li:nth-child(3) {
+        left: 70%;
+        width: 20px;
+        height: 20px;
+        animation-delay: 4s;
+    }
+    
+    .bg-animation li:nth-child(4) {
+        left: 40%;
+        width: 60px;
+        height: 60px;
+        animation-delay: 0s;
+        animation-duration: 18s;
+    }
+    
+    .bg-animation li:nth-child(5) {
+        left: 65%;
+        width: 20px;
+        height: 20px;
+        animation-delay: 0s;
+    }
+    
+    .bg-animation li:nth-child(6) {
+        left: 75%;
+        width: 110px;
+        height: 110px;
+        animation-delay: 3s;
+    }
+    
+    .bg-animation li:nth-child(7) {
+        left: 35%;
+        width: 150px;
+        height: 150px;
+        animation-delay: 7s;
+    }
+    
+    .bg-animation li:nth-child(8) {
+        left: 50%;
+        width: 25px;
+        height: 25px;
+        animation-delay: 15s;
+        animation-duration: 45s;
+    }
+    
+    .bg-animation li:nth-child(9) {
+        left: 20%;
+        width: 15px;
+        height: 15px;
+        animation-delay: 2s;
+        animation-duration: 35s;
+    }
+    
+    .bg-animation li:nth-child(10) {
+        left: 85%;
+        width: 150px;
+        height: 150px;
+        animation-delay: 0s;
+        animation-duration: 11s;
+    }
+    
+    @keyframes animate {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+            border-radius: 0;
+        }
+        100% {
+            transform: translateY(-1000px) rotate(720deg);
+            opacity: 0;
+            border-radius: 50%;
+        }
     }
     
     .signup-container {
@@ -15,132 +130,393 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-image: url('{% static "assets/img/illustrations/signup.svg" %}');
-        background-size: 45%;
-        background-position: left bottom;
-        background-repeat: no-repeat;
+        position: relative;
+        z-index: 5;
+    }
+    
+    /* Center form fields */
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .position-relative {
+        width: 100%;
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* Center other form elements */
+    .mb-4 {
+        width: 100%;
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .btn-signup {
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* Center the row with first name and last name */
+    .signup-card .row {
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 360px;
     }
     
     .signup-card {
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 15px;
-        padding: 40px 30px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        max-width: 500px;
+        background: rgba(30, 41, 59, 0.8);
+        border-radius: 16px;
+        padding: 40px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        max-width: 550px;
         width: 100%;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        position: relative;
+        z-index: 10;
+        animation: cardAppear 0.8s cubic-bezier(0.2, 0.85, 0.4, 1.275) forwards;
+        overflow: hidden;
+    }
+    
+    /* Glass effect card with glow */
+    .signup-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 43%), 
+                  radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.2) 0%, transparent 40%);
+        z-index: -1;
+        opacity: 0.9;
+    }
+    
+    .signup-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        z-index: 1;
+    }
+    
+    @keyframes cardAppear {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    
+    /* Brand logo */
+    .signup-brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        position: relative;
+    }
+    
+    .signup-brand img {
+        height: 60px;
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
     }
     
     .signup-header {
         text-align: center;
-        margin-bottom: 25px;
-    }
-    
-    .signup-header img {
-        width: 70px;
-        margin-bottom: 15px;
+        margin-bottom: 30px;
     }
     
     .signup-header h2 {
-        color: #1a1c2b;
-        font-weight: 600;
-        margin-bottom: 8px;
+        color: #ffffff;
+        font-weight: 700;
+        margin-bottom: 10px;
+        font-size: 28px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     
     .signup-header p {
-        color: #6c757d;
-        font-size: 0.95rem;
+        color: #b0b7c3;
+        font-size: 15px;
+        margin-bottom: 0;
+        opacity: 0.9;
     }
     
     .form-icon {
         position: absolute;
-        left: 15px;
-        top: 17px;
-        color: #6c757d;
+        left: 16px;
+        top: 16px;
+        color: rgba(255, 255, 255, 0.5);
         z-index: 2;
+        transition: all 0.2s ease;
+        opacity: 0.8;
     }
     
+    /* Enhanced form fields */
+    .form-control {
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 16px 16px 16px 48px;
+        border-radius: 12px;
+        height: auto;
+        font-size: 15px;
+        color: #f1f5f9;
+        background-color: rgba(255, 255, 255, 0.07);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) inset;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+        border-color: rgba(124, 58, 237, 0.5);
+        box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
+        background-color: rgba(255, 255, 255, 0.1);
+        outline: none;
+    }
+    
+    .form-control:focus + .form-icon {
+        color: #7c3aed;
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+        font-weight: 400;
+        opacity: 0.7;
+    }
+    
+    /* Modern signup button */
     .btn-signup {
-        background: linear-gradient(to right, #5163df, #6c8cfd);
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
         border: none;
         color: white;
-        border-radius: 10px;
-        padding: 12px 0;
+        border-radius: 12px;
+        padding: 16px 0;
         font-weight: 600;
+        font-size: 16px;
         letter-spacing: 0.5px;
-        box-shadow: 0 4px 15px rgba(81, 99, 223, 0.35);
+        box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.5);
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn-signup::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: all 0.5s ease;
     }
     
     .btn-signup:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(81, 99, 223, 0.4);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px -5px rgba(124, 58, 237, 0.7);
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
     }
     
+    .btn-signup:hover::after {
+        left: 100%;
+    }
+    
+    .btn-signup:active {
+        transform: translateY(-1px);
+    }
+    
+    /* Divider with text */
+    .divider-with-text {
+        position: relative;
+        text-align: center;
+        margin: 28px auto 24px;
+        max-width: 360px;
+        width: 100%;
+    }
+    
+    .divider-with-text::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background-color: rgba(255, 255, 255, 0.1);
+        z-index: 1;
+    }
+    
+    .divider-with-text span {
+        position: relative;
+        z-index: 2;
+        background-color: rgba(30, 41, 59, 0.8);
+        padding: 0 16px;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 14px;
+    }
+    
+    /* Enhanced social login */
     .social-login {
         display: flex;
         justify-content: center;
-        margin: 25px 0 15px;
+        margin: 24px auto;
+        gap: 20px;
+        max-width: 360px;
+        width: 100%;
     }
     
     .social-btn {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 8px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .social-btn svg {
+        position: relative;
+        z-index: 2;
+        transition: all 0.2s ease;
+    }
+    
+    .social-btn::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0;
         transition: all 0.3s ease;
+        background: rgba(0, 0, 0, 0.05);
     }
     
     .social-btn:hover {
-        transform: translateY(-3px);
+        transform: translateY(-4px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
     }
     
+    .social-btn:hover::after {
+        opacity: 1;
+    }
+    
+    .social-btn:hover svg {
+        transform: scale(1.15);
+    }
+    
+    /* Sign in link */
     .login-link {
         text-align: center;
-        margin-top: 20px;
-        color: #6c757d;
+        margin: 24px auto 0;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 15px;
+        padding: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        max-width: 360px;
+        width: 100%;
     }
     
     .login-link a {
-        color: #5163df;
+        color: #7c3aed;
         font-weight: 600;
         text-decoration: none;
+        position: relative;
+        transition: all 0.2s ease;
+        text-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
+    }
+    
+    .login-link a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #7c3aed;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+        transform-origin: right;
     }
     
     .login-link a:hover {
-        text-decoration: underline;
+        text-decoration: none;
+    }
+    
+    .login-link a:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+    
+    /* Form checkbox styling */
+    .form-check-input {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+        width: 18px;
+        height: 18px;
     }
     
     .form-check-input:checked {
-        background-color: #5163df;
-        border-color: #5163df;
+        background-color: #7c3aed;
+        border-color: #7c3aed;
+    }
+    
+    .form-check-label {
+        color: rgba(255, 255, 255, 0.7);
+        padding-left: 5px;
+        font-size: 14px;
     }
     
     .terms-label a {
-        color: #5163df;
-        font-weight: 500;
+        color: #7c3aed;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+    
+    .terms-label a:hover {
+        color: #8b5cf6;
+        text-decoration: none;
     }
 </style>
 {% endblock extra_css %}
 
 {% block content %}
+<!-- Animated background elements -->
+<ul class="bg-animation">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+
 <div class="signup-container">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-7">
                 <div class="signup-card">
-                    <div class="signup-header">
+                    <!-- Brand logo -->
+                    <div class="signup-brand">
                         <img src="{% static 'assets/img/brand/light.svg' %}" alt="PathwaySolutions Logo">
+                    </div>
+                    
+                    <div class="signup-header">
                         <h2>Create Your Account</h2>
                         <p>Join PathwaySolutions to manage halls and access our POS system</p>
                     </div>
                     
-                    <form id="signup-form">
+                    <form id="signup-form" method="post" action="" class="text-center">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="col-md-6 mb-4">
                                 <div class="position-relative">
@@ -149,14 +525,32 @@
                                             <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path>
                                         </svg>
                                     </span>
-                                    <input type="text" class="form-control form-control-lg ps-5" id="firstname" placeholder="First Name" required>
+                                    {{ form.first_name }}
+                                    {% if form.first_name.errors %}
+                                    <div class="invalid-feedback d-block">{{ form.first_name.errors }}</div>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="position-relative">
-                                    <input type="text" class="form-control form-control-lg" id="lastname" placeholder="Last Name" required>
+                                    {{ form.last_name }}
+                                    {% if form.last_name.errors %}
+                                    <div class="invalid-feedback d-block">{{ form.last_name.errors }}</div>
+                                    {% endif %}
                                 </div>
                             </div>
+                        </div>
+                        
+                        <div class="position-relative mb-4">
+                            <span class="form-icon">
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path>
+                                </svg>
+                            </span>
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                            <div class="invalid-feedback d-block">{{ form.username.errors }}</div>
+                            {% endif %}
                         </div>
                         
                         <div class="position-relative mb-4">
@@ -166,7 +560,10 @@
                                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                                 </svg>
                             </span>
-                            <input type="email" class="form-control form-control-lg ps-5" id="email" placeholder="Email address" required autofocus>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                            <div class="invalid-feedback d-block">{{ form.email.errors }}</div>
+                            {% endif %}
                         </div>
                         
                         <div class="position-relative mb-4">
@@ -175,7 +572,10 @@
                                     <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </span>
-                            <input type="password" class="form-control form-control-lg ps-5" id="password" placeholder="Password" required>
+                            {{ form.password1 }}
+                            {% if form.password1.errors %}
+                            <div class="invalid-feedback d-block">{{ form.password1.errors }}</div>
+                            {% endif %}
                         </div>
                         
                         <div class="position-relative mb-4">
@@ -184,8 +584,17 @@
                                     <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </span>
-                            <input type="password" class="form-control form-control-lg ps-5" id="confirm_password" placeholder="Confirm Password" required>
+                            {{ form.password2 }}
+                            {% if form.password2.errors %}
+                            <div class="invalid-feedback d-block">{{ form.password2.errors }}</div>
+                            {% endif %}
                         </div>
+                        
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                        {% endif %}
                         
                         <div class="mb-4">
                             <div class="form-check">
@@ -198,10 +607,8 @@
                         
                         <button type="submit" class="btn btn-signup w-100">Create Account</button>
                         
-                        <div class="text-center my-4">
-                            <span style="color: #6c757d; position: relative; display: inline-block; padding: 0 10px; background: rgba(255, 255, 255, 0.9);">
-                                or sign up with
-                            </span>
+                        <div class="divider-with-text">
+                            <span>or sign up with</span>
                         </div>
                         
                         <div class="social-login">
@@ -232,3 +639,31 @@
     </div>
 </div>
 {% endblock content %}
+
+{% block extra_javascript %}
+<script>
+    // Handle signup form submission with loading animation
+    document.addEventListener('DOMContentLoaded', function() {
+        const signupForm = document.getElementById('signup-form');
+        
+        if (signupForm) {
+            // Update the form action to ensure it submits to the correct URL
+            signupForm.action = window.location.pathname;
+            
+            // Add a submit event listener to show loading state
+            signupForm.addEventListener('submit', function(e) {
+                const submitButton = document.querySelector('.btn-signup');
+                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Creating Account...';
+                submitButton.disabled = true;
+                // Form validation is handled by Django
+            });
+            
+            // Focus on first input field for better UX
+            const firstInput = signupForm.querySelector('input');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        }
+    });
+</script>
+{% endblock extra_javascript %}

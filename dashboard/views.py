@@ -1,60 +1,62 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate, logout
 from django.utils.decorators import method_decorator
+from .forms import LoginForm, SignUpForm
 
 # Create your views here.
 
 # Authentication views
 def login_view(request):
     if request.method == 'POST':
-        # Print debug information
-        print("POST request received in login_view")
-        print("POST data:", request.POST)
+        form = LoginForm(request=request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            remember_me = form.cleaned_data.get('remember_me')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                # If remember_me is False, set session expiry to 0 (close browser logout)
+                if not remember_me:
+                    request.session.set_expiry(0)
+                login(request, user)
+                return redirect('index')
+    else:
+        form = LoginForm()
         
-        # In a real application, you would authenticate the user here
-        # For now, we'll just redirect to the dashboard
-        
-        # Bypass the @login_required decorator by setting a session variable
-        # This is just for demonstration purposes - in a real app you would authenticate properly
-        request.session['authenticated'] = True
-        
-        # Use an explicit redirect to the index view
-        response = redirect('index')
-        print("Redirecting to:", response.url)
-        return response
-    
     context = {
-        'segment': 'login'
+        'segment': 'login',
+        'form': form
     }
     return render(request, 'authentication/login.html', context)
 
 def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+    else:
+        form = SignUpForm()
+        
     context = {
-        'segment': 'signup'
+        'segment': 'signup',
+        'form': form
     }
     return render(request, 'authentication/signup.html', context)
 
 # Main dashboard views
-# Modified to use session authentication instead of Django's built-in auth
+@login_required
 def index(request):
-    # Check if the user is authenticated via session
-    if not request.session.get('authenticated', False):
-        # If not authenticated, redirect to login
-        return redirect('login')
-    
     context = {
         'segment': 'dashboard'
     }
     return render(request, 'dashboard/index.html', context)
 
-# Modified to use session authentication
+@login_required
 def profile(request):
-    # Check if the user is authenticated via session
-    if not request.session.get('authenticated', False):
-        # If not authenticated, redirect to login
-        return redirect('login')
-    
     context = {
         'segment': 'profile'
     }
@@ -62,9 +64,5 @@ def profile(request):
 
 # Logout view
 def logout_view(request):
-    # Clear the authenticated session variable
-    if 'authenticated' in request.session:
-        del request.session['authenticated']
-    
-    # Redirect to login page
+    logout(request)
     return redirect('login')
